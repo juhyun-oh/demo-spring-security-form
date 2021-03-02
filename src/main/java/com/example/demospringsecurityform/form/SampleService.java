@@ -5,6 +5,7 @@ import com.example.demospringsecurityform.account.AccountContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,8 +14,9 @@ import java.util.Collection;
 public class SampleService {
 
     public void dashboard() {
-        Account account = AccountContext.getAccount();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         System.out.println("=================");
-        System.out.println(account.getUsername());
+        System.out.println(userDetails.getUsername());
     }
 }
